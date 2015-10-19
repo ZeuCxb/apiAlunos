@@ -2,6 +2,10 @@ module.exports = function(app) {
 
 	var alunos = app.controllers.alunos;
 
+	app.get('/', function(req, res) {
+		res.redirect('/alunos');
+	});
+
 	app.get('/alunos', alunos.list);
 	app.post('/alunos', alunos.create);
 	app.delete('/alunos/id', alunos.delete);
