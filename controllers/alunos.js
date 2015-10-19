@@ -1,39 +1,78 @@
 module.exports = function(app) {
 	var AlunoController = {};
 
-	var alunos = [
-		{_id: 1, nome: 'exp1', email: 'exp1@email.com'},
-		{_id: 2, nome: 'exp2', email: 'exp2@email.com'},
-		{_id: 3, nome: 'exp3', email: 'exp3@email.com'}
-	];
+	var Alunos = app.models.alunos;
 
 	AlunoController.list = function(req, res) {
-		res.json(alunos);
+		Alunos.find().exec()
+			.then(
+				function(alunos) {
+					res.json(alunos);
+				},
+				function(error) {
+					console.error(error);
+					res.status(500).json(error);
+				}
+			);
 	};
 
 	AlunoController.create = function(req, res) {
-		var aluno = req.body.aluno;
-        alunos.push(aluno);
+		Alunos.create(req.body)
+			.then(
+				function(contato) {
+					res.status(201).json(contato);
+				},
+				function(error) {
+					console.error(error);
+					res.status(500).json(error);
+				}
+			);
 	};
 
 	AlunoController.delete = function(req, res) {
+		var _id = req.params.id;
 
+		Alunos.remove({"_id" : _id}).exec()
+			.then(
+				function() {
+					res.status(204).end();
+				},
+				function(error) {
+					return console.error(error);
+				}
+			);
 	};
 
 	AlunoController.show = function(req, res) {
-		var id = req.params.id;
+		var _id = req.params.id;
 
-		var aluno = alunos.filter(function(alunos) {
-			return alunos._id == id;
-		})[0];
+		Alunos.findById(_id).exec()
+			.then(
+				function(aluno) {
+					if(!aluno) throw new Error('Aluno não encontrado');
 
-		aluno ?
-			res.json(aluno) :
-				res.status(404).send('Aluno não encontrado');
+					res.json(aluno);
+				},
+				function(error) {
+					console.error(error);
+					res.status(404).json(error);
+				}
+			);
 	};
 
 	AlunoController.update = function(req, res) {
+		var _id = req.params.id;
 
+		Alunos.findByIdAndUpdate(_id, req.body).exec()
+			.then(
+				function(aluno) {
+					res.json(aluno);
+				},
+				function(error) {
+					console.error(error);
+					res.status(500).json(error);
+				}
+			);
 	};
 
 	return AlunoController;
