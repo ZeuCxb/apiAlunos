@@ -8,6 +8,6 @@ module.exports = function(app) {
 		email: {type: String, required: true, index: {unique: true}}
 	});
 
-	return db.model('aluno', aluno);
+	return db.model('alunos', aluno);
 
 }; 
