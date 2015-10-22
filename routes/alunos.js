@@ -6,10 +6,13 @@ module.exports = function(app) {
 		res.redirect('/alunos');
 	});
 
-	app.get('/alunos', alunos.list);
-	app.post('/alunos', alunos.create);
-	app.delete('/alunos/id', alunos.delete);
-	app.get('/alunos/:id', alunos.show);
-	app.put('/alunos/:id', alunos.update);
+	app.route('/alunos')
+		.get(alunos.list)
+		.post(alunos.create);
+	
+	app.route('/alunos/:id')
+		.delete(alunos.delete)
+		.get(alunos.show)
+		.put(alunos.update);
 
 };
