@@ -8,6 +8,7 @@ module.exports = function(app) {
 			.then(
 				function(alunos) {
 					res.json(alunos);
+					res.setHeader('Cache-Control', 'no-cache');
 				},
 				function(error) {
 					console.error(error);
@@ -52,6 +53,7 @@ module.exports = function(app) {
 					if(!aluno) throw new Error('Aluno não encontrado');
 
 					res.json(aluno);
+					res.setHeader('Cache-Control', 'no-cache');
 				},
 				function(error) {
 					console.error(error);
@@ -67,6 +69,7 @@ module.exports = function(app) {
 			.then(
 				function(aluno) {
 					res.json(aluno);
+					res.setHeader('Cache-Control', 'no-cache');
 				},
 				function(error) {
 					console.error(error);
