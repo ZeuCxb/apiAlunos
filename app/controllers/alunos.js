@@ -8,10 +8,12 @@ module.exports = function(app) {
 			.then(
 				function(alunos) {
 					res.json(alunos);
+					res.end()
 				},
 				function(error) {
 					console.error(error);
 					res.status(500).json(error);
+					res.end()
 				}
 			);
 	};
@@ -21,10 +23,12 @@ module.exports = function(app) {
 			.then(
 				function(contato) {
 					res.status(201).json(contato);
+					res.end()
 				},
 				function(error) {
 					console.error(error);
 					res.status(500).json(error);
+					res.end()
 				}
 			);
 	};
@@ -36,6 +40,7 @@ module.exports = function(app) {
 			.then(
 				function() {
 					res.status(204).end();
+					res.end()
 				},
 				function(error) {
 					return console.error(error);
@@ -52,10 +57,12 @@ module.exports = function(app) {
 					if(!aluno) throw new Error('Aluno não encontrado');
 
 					res.json(aluno);
+					res.end()
 				},
 				function(error) {
 					console.error(error);
 					res.status(404).json(error);
+					res.end()
 				}
 			);
 	};
@@ -67,10 +74,12 @@ module.exports = function(app) {
 			.then(
 				function(aluno) {
 					res.json(aluno);
+					res.end()
 				},
 				function(error) {
 					console.error(error);
 					res.status(500).json(error);
+					res.end()
 				}
 			);
 	};
